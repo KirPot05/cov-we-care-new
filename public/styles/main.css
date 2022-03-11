@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&display=swap');
+@import url('./utils/colors.css');
+@import url('./components/NavBar.css');
+@import url('./components/HomeSection.css');
+@import url('./components/PreventSection.css');
+@import url('./components/SymptomsSection.css');
+@import url('./components/PrecautionSection.css');
+@import url('./components/DoctorSection.css');
+@import url('./components/HandWashSection.css');
+@import url('./components/Footer.css');
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all 0.3s cubic-bezier(0.38, 1.15, 0.7, 1.12);
+}
+
+*::selection{
+    background: var(--dark-blue);
+    color: #fff;
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+
+
+
+section{
+    min-height: 100vh;
+    padding: 1rem 9%;
+    padding-top: 8rem;
+}
+
+
+
+.scroll-top{
+    position: fixed;
+    bottom: 5.5rem;
+    right: 1.5rem;
+    z-index: 50;
+}
+
+.scroll-top img{
+    width: 5rem;
+    animation: float 1.5s linear infinite;
+}
+
+@keyframes float {
+    100%, 0%{
+        transform: translateY(0rem);
+    }
+
+    50%{
+        transform: translateY(-3rem);
+    }
+}
+
+
+
+
+
+
+
+
+
+/* Media Queries */
+@media (max-width: 1200px){
+    html{
+        font-size: 55%;
+    }
+    
+}
+
+@media (max-width: 991px){
+    
+    section{
+        padding: 1rem 3%;
+    }
+    
+    
+
+
+    #menu{
+        display: block;
+    }
+
+    .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 2rem;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+    }
+
+    .navbar.nav-toggle{
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+    .navbar a{
+        display: block;
+        margin: 1.5rem 0;
+        font-size: 2rem;
+    }
+    
+    .fa-times{
+        transform: rotate(180deg);
+    }
+
+    .main-image img{
+        display: none;
+    }
+
+    .symptoms .box img{
+        width: 14rem;
+    }
+
+    .handWash .column .main-image img{
+        display: none;
+    }
+
+}
+
+
+
+@media (max-width: 780px){
+    html{
+        font-size: 50%;
+    }
+    
+    .content h1{
+        font-size: 4rem;
+    }
+
+    .content h3{
+        font-size: 2.5rem;
+    }
+
+    .precautions .column .box-container .box{
+        flex-flow: column;
+        text-align: center;
+    }
+}
+
+
+
+@media (max-width: 450px){
+    
+    .content h1{
+        font-size: 3.5rem;
+    }
+
+    .content h3{
+        font-size: 2.5rem;
+    }
+
+    .doctor .box-container .box{
+        width: 100%;
+    }
+    
+}
