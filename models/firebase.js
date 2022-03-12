@@ -1,9 +1,12 @@
 const {initializeApp} = require("firebase/app");
 const {getFirestore} = require('firebase/firestore');
 const { getAuth } = require('firebase/auth');
-const { config } = require("dotenv");
 
-config();
+
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
+
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
