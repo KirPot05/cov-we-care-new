@@ -9,13 +9,12 @@ if(process.env.NODE_ENV !== 'production'){
 
 
 const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    // databaseURL: process.env.DATABASE_URL,
-    appId: process.env.APP_ID
+    apiKey: "AIzaSyBBodOcjv0Pg3y45kjtVigZJnA87nIU0k0",
+    authDomain: "cov-we-care-7c2fe.firebaseapp.com",
+    projectId: "cov-we-care-7c2fe",
+    storageBucket: "cov-we-care-7c2fe.appspot.com",
+    messagingSenderId: "274522260662",
+    appId: "1:274522260662:web:18678f07dc2eaed3045217"
 };
 
 const app = initializeApp(firebaseConfig);
