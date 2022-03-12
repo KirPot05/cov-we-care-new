@@ -2,7 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const indexRouter = require('./routes/index');
-
+const userRouter = require('./routes/user');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +24,8 @@ app.use(express.static('public'));
 
 // Routes
 app.use('/', indexRouter)
+app.use('/users', userRouter);
+
 
 
 // Listening At Port

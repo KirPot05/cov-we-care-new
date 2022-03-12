@@ -1,0 +1,30 @@
+@import url('../utils/colors.css');
+
+
+
+
+#registration-card{
+    background-color: var(--orange);
+    margin: 2rem;
+    height: 100%;
+    flex: 1 1 30rem;
+}
+
+.demographics{
+    padding: 2%;
+}
+
+
+.demographics .box{
+    flex: 1 1 25rem;
+    margin: 1.5rem;
+    padding: 2.5rem;
+}
+
+.demographics .box:hover{
+    box-shadow: var(--box-shadow);
+}
+
+.card-title{
+    text-shadow: var(--text-shadow);
+}

@@ -1,0 +1,24 @@
+const {initializeApp} = require("firebase/app");
+const {getFirestore} = require('firebase/firestore');
+const { getAuth } = require('firebase/auth');
+const { config } = require("dotenv");
+
+config();
+
+const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    // databaseURL: process.env.DATABASE_URL,
+    appId: process.env.APP_ID
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
+const auth = getAuth(app);
+
+
+module.exports = {db, auth};
+

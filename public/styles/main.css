@@ -8,6 +8,12 @@
 @import url('./components/DoctorSection.css');
 @import url('./components/HandWashSection.css');
 @import url('./components/Footer.css');
+@import url('./components/Demographics.css');
+@import url('./components/About.css');
+@import url('./components/BookAppointment.css');
+@import url('./components/Blogs.css');
+@import url('./components/UserHome.css');
+@import url('./pageStyles/UserPage.css');
 
 
 *{
@@ -20,6 +26,7 @@
     border: none;
     text-transform: capitalize;
     transition: all 0.3s cubic-bezier(0.38, 1.15, 0.7, 1.12);
+    scroll-behavior: smooth;
 }
 
 *::selection{
@@ -64,6 +71,12 @@ section{
         transform: translateY(-3rem);
     }
 }
+
+.user-heading span , .heading span{
+    color: var(--orange);
+    text-transform: uppercase;
+}
+
 
 
 
@@ -132,6 +145,10 @@ section{
 
     .handWash .column .main-image img{
         display: none;
+    }
+
+    .demographics .column{
+        flex-wrap: wrap;
     }
 
 }

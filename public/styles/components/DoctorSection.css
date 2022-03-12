@@ -24,6 +24,12 @@
     background-color: var(--bg-round);
 }
 
+.doctor .box-container .user.box img{
+    background: none;
+    height: 25rem;
+    width: 25rem;
+}
+
 .doctor .box-container .box h3{
     font-size: 2.5rem;
 }
@@ -40,6 +46,8 @@
     margin-top: 1rem;
 }
 
+
+
 .doctor .box-container .box .share a{
     border-radius: 50%;
     height: 4.5rem;
@@ -51,7 +59,14 @@
     color: var(--blue);
 }
 
+.doctor .box-container .user.box .share a{
+    background: #eee;
+    color: var(--orange);
+}
+
+
 .doctor .box-container .box .share a:hover{
-    background: var(--blue);
+    background: var(--orange);
     color: #fff;
 }
+
