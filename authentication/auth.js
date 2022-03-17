@@ -9,12 +9,20 @@ const registerUser = async (email, password) => {
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
 
         if(userCredentials.user != null){
-            return true;
+            return {    
+                user: userCredentials.user, 
+                success: true, 
+                error:null
+            };
         }
         
 
     } catch(e) {
-        return {errorCode: e.code, message: e.message}
+        return {    
+            user: null, 
+            success: false, 
+            error: e
+        };
     }
 
 }

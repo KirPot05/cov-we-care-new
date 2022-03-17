@@ -1,6 +1,6 @@
 const { getDailyCovidData } = require('../models/db');
 const { signInUser } = require('../authentication/auth');
-const isUserAuthenticated = require('../authentication/authState');
+// const isUserAuthenticated = require('../authentication/authState');
 
 const router = require('express').Router();
 
@@ -13,22 +13,22 @@ router.get('/', (req, res) => {
 
 
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
 
-    // try{
-    //     const dashboardData = getDailyCovidData();
+    try{
+        const dashboardData = await fetch('/api/data/get-covid-data');
 
-    //     res.status(200).render('pages/dashboard', {
-    //         data: dashboardData,
-    //         err: null
-    //     })
+        res.status(200).render('pages/dashboard', {
+            data: dashboardData,
+            err: null
+        })
 
-    // } catch(error) {
-    //     res.status(500).render('pages/ServerError', {
-    //         err: error
-    //     })
+    } catch(error) {
+        res.status(500).render('pages/ServerError', {
+            err: error
+        })
 
-    // }
+    }
 
     res.render('pages/Dashboard');
 
@@ -53,31 +53,27 @@ router.post('/signIn', async (req, res) => {
 
         const user = await signInUser(email, password);
 
-        res.status(200).render('pages/user', {
-            user: user
-        });
+        if(user){
+
+            // localStorage.setItem('user-id', user.uid);
+            res.setHeader('auth-token', user.uid);
+            res.send('success auth')
+            // res.status(200).redirect('/users');
+        
+        } else{
+            throw new Error('Internal Server Error');
+        }
+
 
     } catch(err){
         res.render('pages/signInPage', {
             error: err
         });
+        console.error(err);
     }
 });
 
 
-router.get('/user', isUserAuthenticated, (req, res) => {
-    
-    try{
-        
-
-    } 
-
-    catch(e){
-
-
-    }
-
-})
 
 
 module.exports = router;

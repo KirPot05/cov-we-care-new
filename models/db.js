@@ -82,6 +82,18 @@ async function saveDailyData(dataObj){
 }
 
 
+const saveUser = async (user) => {
+    const isUserSaved = await saveData('users', user.uid, {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email, 
+        phoneNumber: user.phoneNumber
+    })
+
+    return isUserSaved;
+}
+
+
 
 // Get daily Covid Data 
 function getDailyCovidData(){
@@ -105,15 +117,15 @@ function getDailyCovidData(){
 
 
 // Books out appointment of users with their respective userID
-async function bookAppointment(formData){
+async function bookAppointment(formData, userId){
     
 
     try {
         // Appointments are fixed with userId as their DocID in 'appointments' collection
-        const {fullName, gender, phoneNum, birthDate, address, email, prevMedHistory, currAilment, user} = formData;
+        const { fullName, gender, phoneNum, birthDate, address, email, prevMedHistory, currAilment } = formData;
         
         // Checks if the appointment is already booked by specified user
-        const isAppointmentPresent = await checkData('appointments', user);
+        const isAppointmentPresent = await checkData('appointments', userId);
 
         if(!isAppointmentPresent){
 
@@ -142,7 +154,7 @@ async function bookAppointment(formData){
 
 
 // Updating the Daily Covid Data by Admin (Health Center Staff)
-async function updateDailyData(dataToUpdate, user){
+async function updateDailyData(dataToUpdate){
     
     try {
 
@@ -185,7 +197,7 @@ function receiveAppointments(user){
         
         const unsub = onSnapshot(q, (doc) => {
             doc.forEach(element => {
-                appointments.push(doc.data());
+                appointments.push(element.data());
             });
         });
         
@@ -200,11 +212,11 @@ function receiveAppointments(user){
 
 }
 
-async function cancelAppointment(appointment){
+async function cancelAppointment(appointmentId){
 
     try {
         
-        const appointmentDeleted = deleteDoc(doc(db, 'appointments', appointment.user)).then(() => {
+        const appointmentDeleted = deleteDoc(doc(db, 'appointments', appointmentId)).then(() => {
             return true;
         }).catch(() => {
             return false;
@@ -259,13 +271,19 @@ function getRegionData(){
 // Returns the healthCentres info 
 function getHealthCentreInfo(){
 
-    const healthCentres = getDocCollection('healthCentres', 20);
-    return healthCentres;
+    try{
+        const healthCentres = getDocCollection('healthCentres', 20);
+        return healthCentres;
+
+    } catch{
+        return null;
+    }
 }
 
 
 
 module.exports = {
+    saveUser,
     getHealthCentreInfo,
     getRegionData,
     cancelAppointment,

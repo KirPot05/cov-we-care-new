@@ -10,16 +10,17 @@ const isUserAuthenticated = (req, res, next) => {
         const user = getUser();
 
         if(user != null){
-            localStorage.setItem('auth-token', user.uid);
+            // localStorage.setItem('auth-token', user.uid);
             isAuthenticated = true;
         }
 
         req.isAuthenticated = isAuthenticated;
-        next(req, res, null);
+        req.user = user;
+        next(null, req, res);
 
 
     } catch(error){
-        next(req, res, error);
+        next(error, req, res);
     }
 
 }
