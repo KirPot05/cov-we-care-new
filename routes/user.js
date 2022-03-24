@@ -4,14 +4,15 @@ const { saveUser } = require('../models/db');
 const router = require('express').Router();
 
 
-router.get('/',(req, res) => {
+router.get('/', (req, res) => {
 
     try{
         
         const authToken = req.header('auth-token');
+        // const authToken = localStorage.getItem('auth-token');
         
         if(authToken){
-            res.send('User Index Page')
+            res.send('User Index Page');
             // res.render('pages/UserPage');
         }
 

@@ -47,25 +47,7 @@ const signInUser = async (email, password) => {
 
 
 
-const getUser = () => {
-
-    try{
-
-        onAuthStateChanged(auth, (user) => {
-            if(user){
-                return user;
-            }
-        })
-
-    } catch {
-        return null;
-
-    }
-}
-
-
 module.exports = {
-    getUser,
     signInUser, 
     registerUser
 }

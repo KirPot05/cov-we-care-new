@@ -1,22 +1,27 @@
 @import url('../utils/colors.css');
 
 
+.demographics{
+    padding: 2%;
+    background-color: #f4f6fa;
+    min-height: 50%;
+}
 
 
-#registration-card{
+.demographics #registration-card{
     background-color: var(--orange);
     margin: 2rem;
     height: 100%;
-    flex: 1 1 30rem;
+    flex: 0.15;
 }
 
-.demographics{
-    padding: 2%;
+
+.demographics .box-container{
+    flex: 0.85;
 }
 
 
 .demographics .box{
-    flex: 1 1 25rem;
     margin: 1.5rem;
     padding: 2.5rem;
 }

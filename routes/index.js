@@ -1,6 +1,4 @@
-const { getDailyCovidData } = require('../models/db');
 const { signInUser } = require('../authentication/auth');
-// const isUserAuthenticated = require('../authentication/authState');
 
 const router = require('express').Router();
 
@@ -15,20 +13,20 @@ router.get('/', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
 
-    try{
-        const dashboardData = await fetch('/api/data/get-covid-data');
+    // try{
+    //     const dashboardData = await fetch('/api/data/get-covid-data');
 
-        res.status(200).render('pages/dashboard', {
-            data: dashboardData,
-            err: null
-        })
+    //     res.status(200).render('pages/dashboard', {
+    //         data: dashboardData,
+    //         err: null
+    //     })
 
-    } catch(error) {
-        res.status(500).render('pages/ServerError', {
-            err: error
-        })
+    // } catch(error) {
+    //     res.status(500).render('pages/ServerError', {
+    //         err: error
+    //     })
 
-    }
+    // }
 
     res.render('pages/Dashboard');
 
@@ -55,7 +53,7 @@ router.post('/signIn', async (req, res) => {
 
         if(user){
 
-            // localStorage.setItem('user-id', user.uid);
+            // localStorage.setItem('auth-token', user.uid);
             res.setHeader('auth-token', user.uid);
             res.send('success auth')
             // res.status(200).redirect('/users');

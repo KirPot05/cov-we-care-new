@@ -66,7 +66,7 @@ router.get('/appointments', (req, res) => {
 
         const appointments = receiveAppointments(userId);
 
-        if(appointmentBooked){
+        if(appointments != null){
             res.json({
                 success: true,
                 appointments

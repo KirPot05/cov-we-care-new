@@ -1,5 +1,5 @@
 const {db} = require("./firebase")
-const {collection, doc, getDoc, setDoc, updateDoc, onSnapshot, query, orderBy, limit, deleteDoc} = require('firebase/firestore');
+const {collection, doc, getDoc, setDoc, updateDoc, onSnapshot, query, orderBy, limit, deleteDoc, addDoc, serverTimestamp, where} = require('firebase/firestore');
 
 
 // Fetches the data from Firestore with specified Collection Name and DocID 
@@ -53,7 +53,7 @@ async function saveDailyData(dataObj){
         const {infectedNum, deceasedNum, activeNum, recoveredNum, date} = dataObj;
 
         // Date to be in this format while saving
-        // date: new Date(Date.now()).toDateString(),
+        // date: new Date(Date.now()).toDateString())
 
         const isDatapresent = await checkData('dailyCovidData', date)
 
@@ -125,25 +125,22 @@ async function bookAppointment(formData, userId){
         const { fullName, gender, phoneNum, birthDate, address, email, prevMedHistory, currAilment } = formData;
         
         // Checks if the appointment is already booked by specified user
-        const isAppointmentPresent = await checkData('appointments', userId);
 
-        if(!isAppointmentPresent){
-
-            const dataToSave = {
-                fullName, 
-                gender, 
-                phoneNum, 
-                birthDate,
-                address, 
-                email, 
-                prevMedHistory, 
-                currAilment,
-                date: new Date(Date.now()).toDateString()
-            }
-
-            const isDataSaved = await saveData('appointments', user, dataToSave);
-            return isDataSaved;
+        const dataToSave = {
+            fullName, 
+            gender, 
+            phoneNum, 
+            birthDate,
+            address, 
+            email, 
+            prevMedHistory, 
+            currAilment,
+            userId,
+            date: serverTimestamp()
         }
+
+        const isDataSaved = await addDoc(collection(db, 'appointments'), dataToSave);
+        return isDataSaved;
 
     } catch (error) {   
         console.error(error.message);
@@ -192,7 +189,7 @@ function receiveAppointments(user){
 
     try{
         
-        const q = query(collection(db, 'appointments', user), orderBy('date', 'desc'), limit(5));
+        const q = query(collection(db, 'appointments'), where('userId', '==', user), orderBy('date', 'desc'), limit(5));
         const appointments = [];
         
         const unsub = onSnapshot(q, (doc) => {
@@ -201,7 +198,7 @@ function receiveAppointments(user){
             });
         });
         
-        return appointments;
+        return appointments.length !== 0 ? appointments : null;
 
     }
     
