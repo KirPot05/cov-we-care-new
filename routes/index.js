@@ -13,22 +13,22 @@ router.get('/', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
 
-    // try{
-    //     const dashboardData = await fetch('/demographics');
+    try{
+        const dashboardData = await fetch('/demographics');
 
-    //     res.status(200).render('pages/dashboard', {
-    //         data: dashboardData,
-    //         err: null
-    //     })
+        res.status(200).render('pages/Dashboard', {
+            data: dashboardData,
+            err: null
+        })
 
-    // } catch(error) {
-    //     res.status(500).render('pages/ServerError', {
-    //         err: error
-    //     })
+    } catch(error) {
+        res.status(500).render('pages/ServerError', {
+            err: error
+        })
 
-    // }
+    }
 
-    res.render('pages/Dashboard');
+    // res.render('pages/Dashboard');
 
 });
 

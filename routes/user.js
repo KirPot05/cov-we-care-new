@@ -16,6 +16,10 @@ router.get('/', (req, res) => {
             // res.render('pages/UserPage');
         }
 
+        else{
+            res.redirect('/signIn');
+        }
+
 
 
     } catch(e) {
@@ -47,6 +51,7 @@ router.post('/new', async (req, res) => {
         if(newUser.success){
             newUser.user.displayName = name;
             await saveUser(newUser.user);
+            localStorage.setItem('auth-token', newUser.user.uid);
         }
 
         res.redirect('/users');
