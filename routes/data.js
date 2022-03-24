@@ -1,13 +1,12 @@
 // Data Fetch API
 
-
-const { getDailyCovidData, updateDailyData, bookAppointment, receiveAppointments, cancelAppointment, getRegionData, getHealthCentreInfo } = require('../models/db');
+const { getDailyCovidData, updateDailyData, bookAppointment, receiveAppointments, cancelAppointment, getRegionData, getHealthCentreInfo, saveDailyData } = require('../models/db');
 
 const router = require('express').Router();
 
 
 // Fetch Daily Covid Data
-router.get('/get-covid-data', (req, res) => {
+router.get('/demographics', (req, res) => {
     
     try{
 
@@ -22,14 +21,41 @@ router.get('/get-covid-data', (req, res) => {
 
     catch(e){
         res.json(e);
-
+        console.error(e);
     }
 });
 
 
 
+
+// Save Daily Covid Data
+router.post('/demographics/new', async (req, res) => {
+
+    try{
+
+        const { dataToUpdate }= req.body;
+
+        const savedData = await saveDailyData(dataToUpdate);
+
+        if(savedData != null){
+            res.json({ savedData })
+        } else {
+            throw new Error('Data Updating Failed');
+        }
+
+
+    } catch(e){
+        console.error(e);
+        res.json(e);
+    }   
+
+});
+
+
+
+
 // Update Daily Covid Data
-router.put('/update-daily-covid-data', async (req, res) => {
+router.put('/demographics/:id', async (req, res) => {
 
     try{
 
@@ -49,7 +75,7 @@ router.put('/update-daily-covid-data', async (req, res) => {
         res.json(e);
     }   
 
-})
+});
 
 
 
@@ -113,6 +139,7 @@ router.post('/appointments/new', async (req, res) => {
     }   
 
 })
+
 
 
 
