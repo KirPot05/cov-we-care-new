@@ -6,11 +6,12 @@ const router = require('express').Router();
 
 
 // Fetch Daily Covid Data
-router.get('/demographics', (req, res) => {
+router.get('/demographics', async (req, res) => {
     
     try{
 
-        const data = getDailyCovidData();
+        const data = await getDailyCovidData();
+        console.log(data)
         if(data != null){
             res.status(200).json(data);
         }
@@ -33,9 +34,10 @@ router.post('/demographics/new', async (req, res) => {
 
     try{
 
-        const { dataToUpdate }= req.body;
+        // const { dataToUpdate } = req.body;
+        console.log(req.body);
 
-        const savedData = await saveDailyData(dataToUpdate);
+        const savedData = await saveDailyData(req.body);
 
         if(savedData != null){
             res.json({ savedData })
@@ -55,13 +57,13 @@ router.post('/demographics/new', async (req, res) => {
 
 
 // Update Daily Covid Data
-router.put('/demographics/:id', async (req, res) => {
+router.put('/demographics/edit/:date', async (req, res) => {
 
     try{
 
-        const { dataToUpdate }= req.body;
+        // const { dataToUpdate }= req.body;
 
-        const updatedData = await updateDailyData(dataToUpdate);
+        const updatedData = await updateDailyData(req.body);
 
         if(updatedData != null){
             res.json({ updatedData })

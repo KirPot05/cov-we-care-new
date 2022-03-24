@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.get('/dashboard', async (req, res) => {
 
     // try{
-    //     const dashboardData = await fetch('/api/data/get-covid-data');
+    //     const dashboardData = await fetch('/demographics');
 
     //     res.status(200).render('pages/dashboard', {
     //         data: dashboardData,

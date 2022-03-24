@@ -55,7 +55,7 @@ async function saveDailyData(dataObj){
         // Date to be in this format while saving
         // date: new Date(Date.now()).toDateString())
 
-        const isDatapresent = await checkData('dailyCovidData', date)
+        const isDatapresent = await checkData('dailyCovidData', date);
 
         // Shows that data is already present in DB
         if(isDatapresent){
@@ -96,18 +96,16 @@ const saveUser = async (user) => {
 
 
 // Get daily Covid Data 
-function getDailyCovidData(){
+async function getDailyCovidData(){
 
     try {
-        let covidData;
         const date = new Date(Date.now()).toDateString();
-        const unsub = onSnapshot(doc(db, 'dailyCovidData', date), (doc) => {
-            covidData = doc.data();
-        });
-
-        unsub();
+        const covidData = await fetchDataSnap('dailyCovidData', date);
         
-        return covidData;
+
+        // unsub();
+        
+        return covidData.data();
 
     } catch (error) {
         console.error(error)
