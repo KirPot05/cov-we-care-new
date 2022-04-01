@@ -3,7 +3,6 @@ const { saveUser } = require('../models/db');
 
 const router = require('express').Router();
 
-
 router.get('/', (req, res) => {
 
     try{
@@ -23,9 +22,9 @@ router.get('/', (req, res) => {
 
 
     } catch(e) {
-        console.log("error");
-        // res.redirect('/signIn');
-        res.send('Error')
+        console.log("Error Logging In");
+        res.redirect('/signIn');
+        // res.send('Error')
     }
 
 });
@@ -35,7 +34,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/new', (req, res) => {
-    res.render('pages/signupPage');
+    res.render('pages/Register');
 });
 
 
@@ -51,11 +50,15 @@ router.post('/new', async (req, res) => {
         if(newUser.success){
             newUser.user.displayName = name;
             await saveUser(newUser.user);
-            localStorage.setItem('auth-token', newUser.user.uid);
+            // localStorage.setItem('auth_token', newUser.user.uid);
+            res.json({token: newUser.user.accessToken});
         }
 
-        res.redirect('/users');
+        // res.redirect('/users');
         // res.send("User Created");
+        else{
+            throw new Error('Error Creating User');
+        }
 
     } catch(e) {
         console.error(e);

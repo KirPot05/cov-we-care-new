@@ -17,7 +17,7 @@ function stickyNav(){
 }
 
 
-menu.addEventListener('click', () => {
+menu?.addEventListener('click', () => {
     menu.classList.toggle('fa-times');
     navbar.classList.toggle('nav-toggle')
 });
@@ -26,22 +26,20 @@ menu.addEventListener('click', () => {
 
 window.addEventListener("scroll", () => {
 
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('nav-toggle')
+    menu?.classList.remove('fa-times');
+    navbar?.classList.remove('nav-toggle')
 
     stickyNav();
 
 
-    sections.forEach(section => {
+    sections?.forEach(section => {
         let top = window.scrollY;
         let height = section.offsetHeight;
         let offset = section.offsetTop - 150;
         let id = section.getAttribute('id');
 
-        console.log(section)
-
         if(top >= offset  &&  top < offset + height){
-            navLinks.forEach(link => {
+            navLinks?.forEach(link => {
                 link.classList.remove('active');
                 document.querySelector('header .navbar a[href*='+ id +']').classList.add('active');
             })
@@ -52,3 +50,6 @@ window.addEventListener("scroll", () => {
     
 
 });
+
+
+

@@ -30,6 +30,11 @@ app.use('/users', userRouter);
 app.use('/api/data', dataRouter)
 
 
+app.all('*', (req, res) => {
+    res.status(200).render('pages/Error');
+});
+
+
 // Listening At Port
 app.listen(PORT, () => {
     console.log("Listening at http://localhost:3000");
