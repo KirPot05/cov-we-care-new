@@ -11,10 +11,12 @@
         <a href="#appointments" class="nav-link"> Book Appointment </a>
         <a href="#doctor" class="nav-link"> Doctors</a>
         <a href="#blogs" class="nav-link"> Blogs </a>
-    </nav>
 
+    </nav>
+    
 </header>
 
+<!--  -->
 
 <!-- Home -->
 <%- include('../components/UserHome.ejs') %>
@@ -139,4 +141,4 @@
 
 
 <!-- Scroll Up Functionality -->
-<%- include('../utils/scroll_Up.ejs')  %> 
+<%- include('../utils/scroll_Up.ejs', {home: 'user-home'})  %> 

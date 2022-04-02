@@ -7,17 +7,7 @@ router.get('/', (req, res) => {
 
     try{
         
-        const authToken = req.header('auth-token');
-        // const authToken = localStorage.getItem('auth-token');
-        
-        if(authToken){
-            res.send('User Index Page');
-            // res.render('pages/UserPage');
-        }
-
-        else{
-            res.redirect('/signIn');
-        }
+        res.render('pages/UserPage');
 
 
 
@@ -66,6 +56,8 @@ router.post('/new', async (req, res) => {
     }
 
 })
+
+
 
 
 

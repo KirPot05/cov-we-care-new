@@ -18,8 +18,8 @@ function stickyNav(){
 
 
 menu?.addEventListener('click', () => {
-    menu.classList.toggle('fa-times');
-    navbar.classList.toggle('nav-toggle')
+    menu?.classList.toggle('fa-times');
+    navbar?.classList.toggle('nav-toggle')
 });
 
 

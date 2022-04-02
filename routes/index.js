@@ -1,4 +1,6 @@
+const { signOut } = require('firebase/auth');
 const { signInUser } = require('../authentication/auth');
+const { auth } = require('../models/firebase');
 
 const router = require('express').Router();
 
@@ -54,9 +56,11 @@ router.post('/signIn', async (req, res) => {
         if(user){
 
             // localStorage.setItem('auth-token', user.uid);
-            res.setHeader('auth-token', user.uid);
-            res.send('success auth')
+            // res.json(user.uid);
+            const token = await user.getIdToken();
+            res.json(token);
             // res.status(200).redirect('/users');
+            
         
         } else{
             throw new Error('Internal Server Error');
@@ -72,6 +76,19 @@ router.post('/signIn', async (req, res) => {
 });
 
 
+router.post('/logout', async (req, res) => {
+    try{
+
+        await signOut(auth);
+        res.redirect('/signIn');
+
+        
+
+    } catch(e) {
+        console.error('Error Signing Out');
+        res.json(e);
+    }
+})
 
 
 module.exports = router;
