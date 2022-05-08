@@ -81,12 +81,15 @@ if(location.pathname === '/users'){
 
     }
 
-
     
+// Handling Logout State - (removes auth token from localstorage)
+const logout = document.getElementById('logoutForm');
 
-
-
-
+if(logout){
+    logout.addEventListener('submit', () => {
+        localStorage.removeItem('auth-token');
+    })
+}
 
 
 
