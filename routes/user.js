@@ -33,12 +33,12 @@ router.post('/new', async (req, res) => {
 
     try{
 
-        const { name, email, password } = req.body;
+        const { uname, email, password } = req.body;
 
         const newUser = await registerUser(email, password);
 
         if(newUser.success){
-            newUser.user.displayName = name;
+            newUser.user.displayName = uname;
             await saveUser(newUser.user);
             // localStorage.setItem('auth_token', newUser.user.uid);
             res.json({token: newUser.user.accessToken});

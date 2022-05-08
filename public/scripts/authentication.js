@@ -19,24 +19,26 @@ if(location.pathname === '/users'){
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const uname = document.getElementById('name');
-            const email = document.getElementById('email');
-            const password = document.getElementById('password');
+            const uname = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
             // console.log(registerForm);
-            const authToken = await fetch('/users/new', {
+            const authToken = await fetch('http://localhost:3000/users/new', {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
                 }, 
                 body: JSON.stringify({
-                    uname, 
-                    email, 
+                    uname,
+                    email,
                     password
                 })
             })
 
             const { token } = await authToken.json();
+            console.log(token);
+
 
             if (token != null) {
                 localStorage.setItem('auth-token', token);
